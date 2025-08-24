@@ -21,4 +21,26 @@ public class Solution {
         }
         return ans + 1;
     }
+
+    public boolean partitionArray(int[] nums, int k) {
+        int n = nums.length;
+
+        if (k * k != n) {
+            return false;
+        }
+        HashMap<Integer, Integer> hs = new HashMap<>();
+        for (int ele : nums) {
+            if (hs.containsKey(ele)) {
+                hs.put(ele, hs.get(ele) + 1);
+            } else {
+                hs.put(ele, 1);
+            }
+        }
+        for (Integer key : hs.keySet()) {
+            if (hs.get(key) > k) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
