@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,5 +74,87 @@ public class Solution {
             }
         }
         return ans;
+    }
+
+    static ArrayList<Integer> subarraySum(int[] arr, int target) {
+        // code here
+
+        int sum = 0, start = 0;
+        ArrayList<Integer> ans = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
+            while (sum > target) {
+                sum -= arr[start++];
+            }
+            if (sum == target) {
+                ans.add(start);
+                ans.add(i + 1);
+                break;
+            }
+            sum += arr[i];
+            System.out.println("sum is " + sum);
+        }
+        if (sum == target) {
+            ans.add(start + 1);
+            ans.add(arr.length);
+
+        }
+        return ans;
+
+    }
+
+    int missingNum(int arr[]) {
+        // code here
+        int missing = 0;
+        for (int i = 0; i < arr.length; i++) {
+            missing = missing ^ (i + 1) ^ arr[i];
+        }
+        missing = missing ^ (arr.length + 1);
+        return missing;
+    }
+
+    public int getSecondLargest(int[] arr) {
+        // code here
+        int first = -1, second = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > first) {
+                second = first;
+                first = arr[i];
+            } else if (arr[i] > second && arr[i] < first) {
+                second = arr[i];
+            }
+        }
+        return second;
+
+    }
+
+    int maxSubarraySum(int[] arr) {
+        // Code here
+        int maxSum = Integer.MIN_VALUE, currSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            currSum += arr[i];
+            maxSum = Math.max(maxSum, currSum);
+            if (currSum < 0)
+                currSum = 0;
+        }
+        maxSum = Math.max(maxSum, currSum);
+        return maxSum;
+    }
+
+    public int find(int start, int arr[]) {
+        if (start == arr.length - 1)
+            return 0;
+        if (start >= arr.length || arr[start] == 0)
+            return -1;
+        long ans = Integer.MIN_VALUE;
+        for (int i = 1; i <= arr[start]; i++) {
+            ans = Math.min(ans, find(start + i, arr));
+        }
+        return (int) ans;
+    }
+
+    public int minJumps(int[] arr) {
+        // code here
+        return find(0, arr);
+
     }
 }
