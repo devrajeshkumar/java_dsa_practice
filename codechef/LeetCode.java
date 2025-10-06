@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LeetCode {
     public static void main(String[] args) {
@@ -83,5 +84,63 @@ public class LeetCode {
         }
         return sb.toString();
 
+    }
+
+    public int maxDistance(int[] position, int m) {
+        int l = 1, r = 1000000000;
+        int ans = 0;
+        Arrays.sort(position);
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            int start = 0, total = 1;
+            for (int i = 1; i < position.length; i++) {
+                if ((position[i] - position[start]) >= mid) {
+                    total++;
+                    start = i;
+                }
+            }
+            if (total >= m) {
+                l = mid + 1;
+                ans = mid;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return ans;
+    }
+
+    public int minTime(int[] arr, int k) {
+        // code here
+        int l = Integer.MAX_VALUE, r = 0;
+        int ans = 0;
+        for (int i = 0; i < arr.length; i++) {
+            l = Math.min(l, arr[i]);
+            r += arr[i];
+        }
+
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            int total = 0, count = 0;
+
+            for (int i = 0; i < arr.length; i++) {
+                total += arr[i];
+                if (total > mid) {
+                    total = arr[i];
+                    count++;
+                }
+            }
+            if (total > 0) {
+                count++;
+            }
+            if (count == k) {
+                r = mid - 1;
+                ans = mid;
+            } else if (count > k) {
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return ans;
     }
 }
