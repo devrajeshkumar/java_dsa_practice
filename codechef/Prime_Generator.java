@@ -40,7 +40,7 @@ public class Prime_Generator {
                 int dummy[] = new int[r - l + 1];
                 for (int prime : ls) {
                     int firstMultiple = l % prime == 0 ? l : l + l % prime;
-                    for (int j = Math.max(firstMultiple, prime * prime); j < r; j += prime) {
+                    for (int j = Math.max(firstMultiple, prime * prime); j <= r; j += prime) {
                         dummy[j - l] = 1;
                     }
                 }
