@@ -40,10 +40,12 @@ public class Primal_Fear {
         }
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
+        StringBuilder sb = new StringBuilder();
         while (t-- > 0) {
             int n = sc.nextInt();
-            System.out.println(preCount[n]);
+            sb.append(preCount[n]).append("\n");
         }
+        System.out.println(sb);
         sc.close();
     }
 }
