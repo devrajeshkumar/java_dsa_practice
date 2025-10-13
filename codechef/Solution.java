@@ -4,6 +4,13 @@ import java.util.Map;
 
 public class Solution {
     public static void main(String[] args) {
+        for (int x = 1; x <= 25; x++) {
+            int bits = (int) (Math.floor(Math.log(x) / Math.log(2))) + 1;
+            int mask = (1 << bits) - 1;
+            int inversion = (~x) & mask;
+            int xor = x ^ inversion;
+            System.out.printf("x = %2d, inversion = %2d, xor = %2d%n", x, inversion, xor);
+        }
 
     }
 
